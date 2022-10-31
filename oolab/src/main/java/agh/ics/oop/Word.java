@@ -1,8 +1,9 @@
 package agh.ics.oop;
+import java.util.*;
 
 public class Word {
 
-    public static void move(String[] directions, Direction[] convDirections){
+    public static void move2(String[] directions, Direction[] convDirections){
         for(int i = 0; i < directions.length; i++) {
             switch(directions[i]) {
                 case "f":
@@ -31,11 +32,21 @@ public class Word {
         }
         }
 
+    public static void animalMove(String[] args, Animal animal){
+        MoveDirection[] moveDirectionsArray = OptionsParser.parse(args);
+
+        for(MoveDirection direction:moveDirectionsArray){
+            animal.move(direction);
+            System.out.println(animal.toString());
+        }
+    }
+
 
     public static void main(String[] args) {
+        /*
         System.out.println("system wystartował");
         Direction[] directions = new Direction[args.length];
-        move(args, directions);
+        move2(args, directions);
         run(directions);
         System.out.println("system zakończył działanie");
 
@@ -50,6 +61,28 @@ public class Word {
         System.out.println("Po NORTH jest " + MapDirection.NORTH.next());
         System.out.println("Przed NORTH jest " + MapDirection.NORTH.previous());
         System.out.println("Wektor NORTH to " + MapDirection.NORTH.toUnitVector());
+*/
+        //lab3
+        Animal animal1 = new Animal();
+
+        /*
+        System.out.println(animal1.toString());
+        System.out.println(animal1.isAt(new Vector2d(2,1)));
+        animal1.move(MoveDirection.RIGHT);
+        animal1.move(MoveDirection.FORWARD);
+        animal1.move(MoveDirection.FORWARD);
+        animal1.move(MoveDirection.FORWARD);
+
+        System.out.println(animal1.toString());*/
+
+        animalMove(args, animal1);
+
+
+
+
+
+
+
 
     }
 
