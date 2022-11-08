@@ -6,8 +6,8 @@ import static java.lang.Math.min;
 
 public class Vector2d {
 
-    private final int x;
-    private final int y;
+    public final int x;
+    public final int y;
 
     public Vector2d(int x, int y){
         this.x = x;

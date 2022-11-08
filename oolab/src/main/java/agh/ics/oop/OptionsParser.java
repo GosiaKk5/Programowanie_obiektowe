@@ -28,5 +28,26 @@ public class OptionsParser {
         moveDirections.toArray(moveDirectionsArray);
 
         return moveDirectionsArray;
+
+        /*ROZIAZANIE Z STREAM*/ /*
+        Arrays.stream(stringDirections)
+                .map(instruction -> switch(instruction){
+                    case "f", "forward" -> {
+                        MoveDirection.FORWARD;
+                    }
+                    case "b", "backward" -> {
+                        MoveDirection.BACKWARD;
+                    }
+                    case "l", "left" -> {
+                        MoveDirection.LEFT;
+                    }
+                    case "r", "right" -> {
+                        MoveDirection.RIGHT;
+                    }
+                    default -> null;
+
+                })
+                .filter(Objects::nonNull).toArray(MoveDirection[]::new);
+                */
     }
 }
