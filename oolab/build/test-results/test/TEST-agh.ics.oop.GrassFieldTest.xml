@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="agh.ics.oop.GrassFieldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-15T19:00:52" hostname="DESKTOP-SQJCSFB" time="0.021">
+<testsuite name="agh.ics.oop.GrassFieldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-15T19:33:06" hostname="DESKTOP-SQJCSFB" time="0.02">
   <properties/>
-  <testcase name="ifAnimalsMovesCorrect()" classname="agh.ics.oop.GrassFieldTest" time="0.021"/>
+  <testcase name="testMapCorners()" classname="agh.ics.oop.GrassFieldTest" time="0.02"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

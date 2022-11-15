@@ -5,11 +5,11 @@ import java.util.List;
 
 public abstract class AbstractWorldMap implements IWorldMap{
 
-    protected List<Animal> animals = new ArrayList<>();
+    protected List<IMapElement> mapElements = new ArrayList<>();
     @Override
     public boolean place(Animal animal) {
         if(this.canMoveTo(animal.getPosition())){
-            this.animals.add(animal);
+            this.mapElements.add(animal);
             return true;
         }
         return false;
