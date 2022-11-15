@@ -21,4 +21,5 @@ public class RectangularMapTest {
         assertEquals(MapDirection.NORTH, engine.getAnimal(1).getOrientation());
 
     }
+
 }

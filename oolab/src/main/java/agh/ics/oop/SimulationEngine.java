@@ -12,21 +12,17 @@ public class SimulationEngine implements IEngine{
     private IWorldMap map;
 
     public SimulationEngine(MoveDirection[] animalMovements,IWorldMap map, Vector2d[] initialPositions){
-
         this.initialPositions = initialPositions;
         this.animalMovements = animalMovements;
         this.animals = new ArrayList<>();
         this.map = map;
-
 
         for(Vector2d position:initialPositions){
             Animal animal = new Animal(map, position);
             if(this.map.place(animal)){
                 this.animals.add(animal);
             };
-
         }
-
     }
 
     public void run(){
