@@ -41,18 +41,25 @@ public class GrassField extends AbstractWorldMap{
     @Override
     public boolean canMoveTo(Vector2d position) {
         if (objectAt(position) != null) {
-            return !(objectAt(position) instanceof Animal);
+            return (objectAt(position) instanceof Grass);
         }
         return true;
     }
     @Override
     public Object objectAt(Vector2d position) {
+        IMapElement grass = null;
         for(IMapElement element:mapElements){
             if(element.getPosition().equals(position)){
-                return element;
+                if(element instanceof Animal){
+                    return element;
+                }else{
+                    grass = element;
+                }
+
             }
         }
-        return null;
+        return grass;
+
     }
 
     @Override

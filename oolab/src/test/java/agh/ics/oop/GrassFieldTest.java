@@ -36,6 +36,18 @@ public class GrassFieldTest {
     }
 
     @Test
+    public void testAnimalsOnGrass(){
+        String[] animalsMovements = {"f","f","r","f","f","r","f","f","r","f","r","f"};
+        MoveDirection[] directions =  OptionsParser.parse(animalsMovements);
+        Vector2d[] positions = {new Vector2d(0, 0)};
+        IWorldMap map = new GrassField(1);
+        SimulationEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        assertTrue(engine.getAnimal(0).isAt(new Vector2d(1, 1)));
+    }
+
+
+    @Test
     public void testGetMapCorner(){
         String[] animalsMovements = {};
         MoveDirection[] directions =  OptionsParser.parse(animalsMovements);
