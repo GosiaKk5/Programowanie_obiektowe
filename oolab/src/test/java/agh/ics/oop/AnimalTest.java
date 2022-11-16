@@ -9,7 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 public class AnimalTest {
 
-    Animal animal = new Animal();
+    RectangularMap map = new RectangularMap(4,4);
+    Vector2d initialPosition = new Vector2d(2,2);
+    Animal animal = new Animal(map, initialPosition);
 
     @Test
     public void testOrientation(){
@@ -85,8 +87,6 @@ public class AnimalTest {
         MoveDirection[] moveDirections = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.LEFT};
         assertArrayEquals(moveDirections, OptionsParser.parse(stringDirections));
     }
-
-
 
 
 }

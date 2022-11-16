@@ -63,9 +63,8 @@ public class Word {
         System.out.println("Wektor NORTH to " + MapDirection.NORTH.toUnitVector());
 */
         //lab3
-        Animal animal1 = new Animal();
+        /*Animal animal1 = new Animal();
 
-        /*
         System.out.println(animal1.toString());
         System.out.println(animal1.isAt(new Vector2d(2,1)));
         animal1.move(MoveDirection.RIGHT);
@@ -73,15 +72,18 @@ public class Word {
         animal1.move(MoveDirection.FORWARD);
         animal1.move(MoveDirection.FORWARD);
 
-        System.out.println(animal1.toString());*/
+        System.out.println(animal1.toString());
 
-        animalMove(args, animal1);
+        animalMove(args, animal1);*/
 
+        /*lab4*/
+        MoveDirection[] directions = new OptionsParser().parse(args);
+        IWorldMap map = new RectangularMap(10, 5);
+        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+        IEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
 
-
-
-
-
+        System.out.println(map.toString());
 
 
     }

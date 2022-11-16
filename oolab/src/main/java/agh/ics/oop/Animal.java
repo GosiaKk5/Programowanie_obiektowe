@@ -4,14 +4,22 @@ public class Animal {
 
     private MapDirection orientation;
     private Vector2d position;
+    private IWorldMap map;
 
-    public Animal(){
+    public Animal(IWorldMap map, Vector2d initialPosition){
         this.orientation = MapDirection.NORTH;
-        this.position = new Vector2d(2, 2);
+        this.position = initialPosition;
+        this.map = map;
     }
 
-    public String toString(){
-        return position.toString() + " " + orientation;
+
+    public String toString() {
+        return switch (this.orientation) {
+            case NORTH -> "N";
+            case EAST -> "E";
+            case SOUTH -> "S";
+            case WEST -> "W";
+        };
     }
 
     public boolean isAt(Vector2d position){
@@ -33,13 +41,13 @@ public class Animal {
             case LEFT -> this.orientation = orientation.previous();
             case FORWARD -> {
                 newPosition = this.position.add(orientation.toUnitVector());
-                if (newPosition.precedes(new Vector2d(4, 4)) && newPosition.follows(new Vector2d(0,0))) {
+                if (this.map.canMoveTo(newPosition)) {
                     this.position = newPosition;
                 }
             }
             case BACKWARD -> {
                 newPosition = this.position.subtract(orientation.toUnitVector());
-                if (newPosition.precedes(new Vector2d(4, 4)) && newPosition.follows(new Vector2d(0,0))) {
+                if (this.map.canMoveTo(newPosition)) {
                     this.position = newPosition;
                 }
             }
