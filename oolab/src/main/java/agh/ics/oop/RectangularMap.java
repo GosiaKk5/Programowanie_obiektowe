@@ -7,13 +7,11 @@ public class RectangularMap extends AbstractWorldMap {
     private final Vector2d upperRight;
     private final Vector2d lowerLeft;
 
-    //private List<Animal> animals;
-
 
     public RectangularMap(int width, int heigth) {
         this.upperRight = new Vector2d(width, heigth);
         this.lowerLeft = new Vector2d(0,0);
-        this.mapElements = new ArrayList<>();
+        this.animals = new ArrayList<>();
     }
 
 
@@ -22,7 +20,7 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     public Object objectAt(Vector2d position){
-        for(IMapElement animal:mapElements){
+        for(Animal animal:animals){
             if(animal.getPosition().equals(position)){
                 return animal;
             }

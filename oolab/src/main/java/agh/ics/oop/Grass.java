@@ -1,6 +1,6 @@
 package agh.ics.oop;
 
-public class Grass implements IMapElement{
+public class Grass{
     private Vector2d position;
 
     public Grass(Vector2d position){
