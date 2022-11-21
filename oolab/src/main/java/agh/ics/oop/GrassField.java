@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Math.sqrt;
 
@@ -10,11 +8,11 @@ public class GrassField extends AbstractWorldMap{
 
 
     private int noGrass;
-    private List<Grass> setOfGrass;
+    private Map<Vector2d, Grass> setOfGrass;
 
     public GrassField(int noGrass){
         super();
-        this.setOfGrass = new ArrayList<>();
+        this.setOfGrass = new HashMap<>();
         addingGrass(noGrass);
 
     }
@@ -29,7 +27,7 @@ public class GrassField extends AbstractWorldMap{
             y = rand.nextInt((int) sqrt(noGrass*10));
 
             if(!isOccupied(new Vector2d(x, y))){
-                this.setOfGrass.add(new Grass(new Vector2d(x, y)));
+                this.setOfGrass.putIfAbsent(new Vector2d(x, y), new Grass(new Vector2d(x, y)));
                 countGrass += 1;
             }
         }
@@ -43,27 +41,34 @@ public class GrassField extends AbstractWorldMap{
     }
     @Override
     public Object objectAt(Vector2d position) {
-        for (Animal animal : animals) {
-            if (animal.getPosition().equals(position)) {
-                return animal;
-            }
+
+        if(animals.get(position) != null){
+            return animals.get(position);
         }
-        for (Grass grass : setOfGrass) {
-            if (grass.getPosition().equals(position)) {
-                return grass;
-            }
-        }
-        return null;
+        return setOfGrass.get(position);
+
+
+//        for (Animal animal : animals) {
+//            if (animal.getPosition().equals(position)) {
+//                return animal;
+//            }
+//        }
+//        for (Grass grass : setOfGrass) {
+//            if (grass.getPosition().equals(position)) {
+//                return grass;
+//            }
+//        }
+//        return null;
 
     }
 
     @Override
     public Vector2d getUpperRight() {
         Vector2d upperRight = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        for (Animal animal : animals) {
+        for (Animal animal : animals.values()) {
             upperRight = upperRight.uperRight(animal.getPosition());
         }
-        for (Grass grass : setOfGrass) {
+        for (Grass grass : setOfGrass.values()) {
             upperRight = upperRight.uperRight(grass.getPosition());
         }
         return upperRight;
@@ -73,10 +78,10 @@ public class GrassField extends AbstractWorldMap{
     public Vector2d getLowerLeft() {
         Vector2d lowerLeft = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
-        for (Animal animal : animals) {
+        for (Animal animal : animals.values()) {
             lowerLeft = lowerLeft.lowerLeft(animal.getPosition());
         }
-        for (Grass grass : setOfGrass) {
+        for (Grass grass : setOfGrass.values()) {
             lowerLeft = lowerLeft.lowerLeft(grass.getPosition());
         }
         return lowerLeft;
