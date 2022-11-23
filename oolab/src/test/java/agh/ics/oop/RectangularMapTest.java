@@ -21,4 +21,17 @@ public class RectangularMapTest {
         assertEquals(MapDirection.NORTH, engine.getAnimal(1).getOrientation());
 
     }
+
+    @Test
+    public void testAnimalsAtTheSamePlace(){
+        String[] animalsMovements = {"f", "f"};
+        MoveDirection[] directions =  OptionsParser.parse(animalsMovements);
+        Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(2, 3)};
+        IWorldMap map = new RectangularMap(10, 5);
+        SimulationEngine engine = new SimulationEngine(directions, map, positions);
+        engine.run();
+        assertTrue(engine.getAnimal(0).isAt(new Vector2d(2, 2)));
+        assertTrue(engine.getAnimal(1).isAt(new Vector2d(2, 4)));
+    }
+
 }

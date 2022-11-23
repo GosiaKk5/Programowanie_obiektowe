@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="agh.ics.oop.GrassFieldTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2022-11-15T20:34:52" hostname="DESKTOP-SQJCSFB" time="0.025">
+  <properties/>
+  <testcase name="testAnimalsOnGrass()" classname="agh.ics.oop.GrassFieldTest" time="0.025"/>
+  <system-out><![CDATA[ y\x  0 1
+  3: -----
+  2: |*| |
+  1: | |N|
+  0: -----
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
