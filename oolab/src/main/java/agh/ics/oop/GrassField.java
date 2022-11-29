@@ -4,34 +4,38 @@ import java.util.*;
 
 import static java.lang.Math.sqrt;
 
-public class GrassField extends AbstractWorldMap{
+public class GrassField extends AbstractWorldMap {
 
 
     private int noGrass;
     private Map<Vector2d, Grass> setOfGrass;
 
-    public GrassField(int noGrass){
+
+    public GrassField(int noGrass) {
         super();
         this.setOfGrass = new HashMap<>();
         addingGrass(noGrass);
 
     }
 
-    private void addingGrass(int noGrass){
+    private void addingGrass(int noGrass) {
         int countGrass = 0;
         Random rand = new Random();
         int x;
         int y;
-        while (countGrass < noGrass){
-            x = rand.nextInt((int) sqrt(noGrass*10));
-            y = rand.nextInt((int) sqrt(noGrass*10));
+        while (countGrass < noGrass) {
+            x = rand.nextInt((int) sqrt(noGrass * 10));
+            y = rand.nextInt((int) sqrt(noGrass * 10));
 
-            if(!isOccupied(new Vector2d(x, y))){
-                this.setOfGrass.putIfAbsent(new Vector2d(x, y), new Grass(new Vector2d(x, y)));
+            if (!isOccupied(new Vector2d(x, y))) {
+                Grass grass = new Grass(new Vector2d(x, y));
+                this.setOfGrass.putIfAbsent(new Vector2d(x, y), grass);
+                this.mapBoundary.add((IMapElement) grass);
                 countGrass += 1;
             }
         }
     }
+
     @Override
     public boolean canMoveTo(Vector2d position) {
         if (objectAt(position) != null) {
@@ -39,14 +43,27 @@ public class GrassField extends AbstractWorldMap{
         }
         return true;
     }
+
     @Override
     public Object objectAt(Vector2d position) {
 
-        if(animals.get(position) != null){
+        if (animals.get(position) != null) {
             return animals.get(position);
         }
         return setOfGrass.get(position);
+    }
 
+    @Override
+    public Vector2d getLowerLeft() {
+        return mapBoundary.lowerLeft();
+    }
+
+    @Override
+    public Vector2d getUpperRight() {
+        return mapBoundary.upperRight();
+    }
+
+}
 
 //        for (Animal animal : animals) {
 //            if (animal.getPosition().equals(position)) {
@@ -60,9 +77,9 @@ public class GrassField extends AbstractWorldMap{
 //        }
 //        return null;
 
-    }
 
-    @Override
+
+/*    @Override
     public Vector2d getUpperRight() {
         Vector2d upperRight = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
         for (Animal animal : animals.values()) {
@@ -85,6 +102,6 @@ public class GrassField extends AbstractWorldMap{
             lowerLeft = lowerLeft.lowerLeft(grass.getPosition());
         }
         return lowerLeft;
-    }
-}
+    }*/
+
 

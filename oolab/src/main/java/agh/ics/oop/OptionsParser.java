@@ -3,7 +3,7 @@ import java.util.*;
 
 public class OptionsParser {
 
-    public static MoveDirection[] parse(String[] stringDirections){
+    public static MoveDirection[] parse(String[] stringDirections) throws IllegalArgumentException {
 
         List<MoveDirection> moveDirections = new ArrayList<MoveDirection>();
 
@@ -20,6 +20,9 @@ public class OptionsParser {
                 }
                 case "r", "right" -> {
                     moveDirections.add(MoveDirection.RIGHT);
+                }
+                default -> {
+                    throw new IllegalArgumentException(directions + " is not legal move specification");
                 }
             }
         }

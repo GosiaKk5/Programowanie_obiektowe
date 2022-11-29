@@ -21,12 +21,9 @@ public class RectangularMap extends AbstractWorldMap {
     }
 
     public Object objectAt(Vector2d position){
-        for(Animal animal:animals.values()){
-            if(animal.getPosition().equals(position)){
-                return animal;
-            }
-        }
-        return null;
+
+        return animals.get(position);
+
     }
 
     @Override
@@ -38,11 +35,5 @@ public class RectangularMap extends AbstractWorldMap {
     public Vector2d getLowerLeft() {
         return this.lowerLeft;
     }
-
-//    public String toString(){
-//        MapVisualizer mapVisualizer = new MapVisualizer(this);
-//        return mapVisualizer.draw(this.lowerLeft, this.upperRight);
-//    }
-
 
 }

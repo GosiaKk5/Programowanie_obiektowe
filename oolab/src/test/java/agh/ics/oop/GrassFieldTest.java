@@ -56,8 +56,9 @@ public class GrassFieldTest {
         SimulationEngine engine = new SimulationEngine(directions, map, positions);
         engine.run();
 
-        assertEquals(new Vector2d(2,3), map.getUpperRight());
         assertEquals(new Vector2d(-1,-1), map.getLowerLeft());
+        assertEquals(new Vector2d(2,3), map.getUpperRight());
+
     }
 
 }

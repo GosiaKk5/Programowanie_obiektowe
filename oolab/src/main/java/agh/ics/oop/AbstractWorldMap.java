@@ -8,14 +8,20 @@ import java.util.Map;
 public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
 
     protected Map<Vector2d, Animal> animals = new HashMap<>();
+    protected MapBoundary mapBoundary = new MapBoundary();
     @Override
     public boolean place(Animal animal) {
-        if(this.canMoveTo(animal.getPosition())){
-            this.animals.put(animal.getPosition(), animal);
+        Vector2d position = animal.getPosition();
+
+        if(this.canMoveTo(position)){
+            this.animals.put(position, animal);
+            this.mapBoundary.add(animal);
             animal.addObserver(this);
+            animal.addObserver(mapBoundary);
             return true;
+        }else{
+            throw new IllegalArgumentException("There is animal on position " + position);
         }
-        return false;
     }
 
     @Override
@@ -24,7 +30,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         return objectAt(position) != null;
     }
 
-    public abstract Vector2d getUpperRight();
+   public abstract Vector2d getUpperRight();
 
     public abstract Vector2d getLowerLeft();
 
@@ -35,7 +41,7 @@ public abstract class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     }
 
     @Override
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition) {
+    public void positionChanged(IMapElement element, Vector2d oldPosition, Vector2d newPosition) {
         Animal animal = animals.get(oldPosition);
         animals.remove(oldPosition);
         animals.put(newPosition, animal);

@@ -2,10 +2,7 @@ package agh.ics.oop;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AnimalTest {
 
@@ -82,8 +79,19 @@ public class AnimalTest {
     }
 
     @Test
-    public void testPerse(){
+    public void testParseException(){
         String[] stringDirections = new String[]{"forward", "eeee", "l", "r", "cos", "left"};
+        MoveDirection[] moveDirections = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.LEFT};
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    OptionsParser.parse(stringDirections);
+                });
+    }
+
+    @Test
+    public void testParseNoException(){
+        String[] stringDirections = new String[]{"forward", "l", "r", "left"};
         MoveDirection[] moveDirections = new MoveDirection[]{MoveDirection.FORWARD, MoveDirection.LEFT, MoveDirection.RIGHT, MoveDirection.LEFT};
         assertArrayEquals(moveDirections, OptionsParser.parse(stringDirections));
     }

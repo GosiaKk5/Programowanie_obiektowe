@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Animal{
+public class Animal implements IMapElement{
 
     private MapDirection orientation;
     private Vector2d position;
@@ -77,9 +77,9 @@ public class Animal{
         observers.remove(observer);
     }
 
-    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+    private void positionChanged(Vector2d oldPosition, Vector2d newPosition){
         for(IPositionChangeObserver observer:observers){
-            observer.positionChanged(oldPosition, newPosition);
+            observer.positionChanged(this, oldPosition, newPosition);
         }
     }
 }
