@@ -1,8 +1,6 @@
 package agh.ics.oop;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import static java.lang.Math.sqrt;
 
@@ -10,15 +8,11 @@ public class GrassField extends AbstractWorldMap{
 
 
     private int noGrass;
-    private Vector2d upperRight;
-    private Vector2d lowerLeft;
+    private Map<Vector2d, Grass> setOfGrass;
 
     public GrassField(int noGrass){
         super();
-        this.upperRight = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
-        this.lowerLeft = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
-        this.noGrass = noGrass;
-
+        this.setOfGrass = new HashMap<>();
         addingGrass(noGrass);
 
     }
@@ -33,7 +27,7 @@ public class GrassField extends AbstractWorldMap{
             y = rand.nextInt((int) sqrt(noGrass*10));
 
             if(!isOccupied(new Vector2d(x, y))){
-                this.mapElements.add(new Grass(new Vector2d(x, y)));
+                this.setOfGrass.putIfAbsent(new Vector2d(x, y), new Grass(new Vector2d(x, y)));
                 countGrass += 1;
             }
         }
@@ -47,36 +41,50 @@ public class GrassField extends AbstractWorldMap{
     }
     @Override
     public Object objectAt(Vector2d position) {
-        IMapElement grass = null;
-        for(IMapElement element:mapElements){
-            if(element.getPosition().equals(position)){
-                if(element instanceof Animal){
-                    return element;
-                }else{
-                    grass = element;
-                }
 
-            }
+        if(animals.get(position) != null){
+            return animals.get(position);
         }
-        return grass;
+        return setOfGrass.get(position);
+
+
+//        for (Animal animal : animals) {
+//            if (animal.getPosition().equals(position)) {
+//                return animal;
+//            }
+//        }
+//        for (Grass grass : setOfGrass) {
+//            if (grass.getPosition().equals(position)) {
+//                return grass;
+//            }
+//        }
+//        return null;
 
     }
 
     @Override
     public Vector2d getUpperRight() {
-        for(IMapElement element:mapElements){
-            this.upperRight = this.upperRight.uperRight(element.getPosition());
+        Vector2d upperRight = new Vector2d(Integer.MIN_VALUE, Integer.MIN_VALUE);
+        for (Animal animal : animals.values()) {
+            upperRight = upperRight.uperRight(animal.getPosition());
         }
-        return this.upperRight;
+        for (Grass grass : setOfGrass.values()) {
+            upperRight = upperRight.uperRight(grass.getPosition());
+        }
+        return upperRight;
     }
 
     @Override
     public Vector2d getLowerLeft() {
+        Vector2d lowerLeft = new Vector2d(Integer.MAX_VALUE, Integer.MAX_VALUE);
 
-        for(IMapElement element:mapElements){
-            this.lowerLeft = this.lowerLeft.lowerLeft(element.getPosition());
+        for (Animal animal : animals.values()) {
+            lowerLeft = lowerLeft.lowerLeft(animal.getPosition());
         }
-        return this.lowerLeft;
+        for (Grass grass : setOfGrass.values()) {
+            lowerLeft = lowerLeft.lowerLeft(grass.getPosition());
+        }
+        return lowerLeft;
     }
 }
 
