@@ -5,13 +5,17 @@ import java.util.TreeSet;
 
 public class MapBoundary implements IPositionChangeObserver{
 
-    public SortedSet<IMapElement> xSet = new TreeSet<>((e1,e2) -> {
+    private SortedSet<IMapElement> xSet = new TreeSet<>((e1,e2) -> {
         if(e1.getPosition().x != e2.getPosition().x)
             return e1.getPosition().x - e2.getPosition().x;
         else
             return  e1.getPosition().y - e2.getPosition().y;
     });
-    public SortedSet<IMapElement> ySet = new TreeSet<>((e1,e2) -> {
+
+    /*private SortedSet<IMapElement> xSet = new TreeSet<>(Comparator.<IMapElement>comparingInt(element -> element.getPosition().x)
+    .thenComparingInt(element -> element.getPosition().y;*/
+
+    private SortedSet<IMapElement> ySet = new TreeSet<>((e1,e2) -> {
         if(e1.getPosition().y != e2.getPosition().y)
             return e1.getPosition().y - e2.getPosition().y;
         else

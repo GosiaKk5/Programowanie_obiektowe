@@ -42,8 +42,8 @@ public class App extends Application {
         int endX = map.getUpperRight().x;
         int endY = map.getUpperRight().y;
 
-        int cellWidth = 30;
-        int cellHeight =30;
+        int cellWidth = 40;
+        int cellHeight = 40;
 
         GridPane gridPane = new GridPane();
         gridPane.setGridLinesVisible(true);
@@ -79,17 +79,13 @@ public class App extends Application {
                 if (this.map.isOccupied(currentPosition)) {
                     Object object = this.map.objectAt(currentPosition);
                     if (object != null) {
-                        result = object.toString();
-                    } else {
-                        result = " ";
+                        GuiElementBox vBox = new GuiElementBox((IMapElement) this.map.objectAt(currentPosition));
+                        gridPane.add(vBox.box, x-startX+1,endY - y+1);
+                        //gridPane.setHalignment(vBox.box, HPos.CENTER);
                     }
-                } else {
-                    result = " ";
                 }
-                Label label = new Label(result);
 
-                gridPane.add(label, x-startX+1,endY - y+1);
-                gridPane.setHalignment(label, HPos.CENTER);
+
             }}
 
 
@@ -99,7 +95,6 @@ public class App extends Application {
 
 
     }}
-
 
 
 

@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationEngine implements IEngine{
+public class SimulationEngine implements IEngine, Runnable{
 
     private final Vector2d[] initialPositions;
     private final MoveDirection[] animalMovements;
@@ -26,9 +26,18 @@ public class SimulationEngine implements IEngine{
     }
 
     public void run(){
+        System.out.println("Threat started");
+        System.out.println(this.map);
         for(int i=0; i < this.animalMovements.length; i++){
             Animal currentAnimal = this.animals.get(i % this.animals.size());
             currentAnimal.move(this.animalMovements[i]);
+            System.out.println(this.map);
+
+            try {
+                Thread.sleep(300);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
         }
     }
 
