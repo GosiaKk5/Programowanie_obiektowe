@@ -1,4 +1,7 @@
 package agh.ics.oop;
+import agh.ics.oop.gui.App;
+import javafx.application.Application;
+
 import java.util.*;
 
 public class Word {
@@ -86,15 +89,25 @@ public class Word {
         System.out.println(map.toString());*/
 
         /*lab5*/
-        MoveDirection[] directions = new OptionsParser().parse(args);
-        GrassField map = new GrassField(10);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
-
-        System.out.println(map.toString());
+        /*try{
+            MoveDirection[] directions = new OptionsParser().parse(args);
+            GrassField map = new GrassField(10);
+            Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
+            IEngine engine = new SimulationEngine(directions, map, positions);
 
 
+            System.out.println("-----");
+            for(IMapElement element : map.mapBoundary.xSet){
+                System.out.println(element.getPosition());
+            }
+            engine.run();
+
+            System.out.println(map.toString());
+        }catch (IllegalArgumentException ex){
+            System.out.println(ex.getMessage());
+        }*/
+
+        Application.launch(App.class, args);
     }
 
 }
